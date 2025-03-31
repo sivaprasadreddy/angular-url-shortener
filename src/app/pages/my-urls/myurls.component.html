@@ -27,7 +27,7 @@
           <input type="checkbox" [checked]="isSelected(shortUrl.id)" (change)="toggleSelection(shortUrl.id)">
         </td>
         <td>
-          <a href="/s/{{shortUrl.shortKey}}" target="_blank">{{shortUrl.shortKey}}</a>
+          <a href="{{getShortUrlString(shortUrl.shortKey)}}" target="_blank">{{getShortUrlString(shortUrl.shortKey)}}</a>
         </td>
         <td>
           <a href="{{shortUrl.originalUrl}}" target="_blank">{{shortUrl.originalUrl}}</a>

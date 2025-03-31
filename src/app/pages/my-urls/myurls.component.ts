@@ -44,6 +44,10 @@ export class MyUrlsComponent implements OnInit {
     })
   }
 
+  getShortUrlString(shortKey: string) {
+    return this.shortUrlService.getShortUrlString(shortKey);
+  }
+
   fetchMyShortUrls() {
     this.shortUrlService.getMyShortUrls(this.page).subscribe(response => {
       console.log(response)

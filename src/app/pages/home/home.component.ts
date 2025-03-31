@@ -48,6 +48,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getShortUrlString(shortKey: string) {
+    return this.shortUrlService.getShortUrlString(shortKey);
+  }
+
   fetchShortUrls() {
     this.shortUrlService.getPublicShortUrls(this.page).subscribe(response => {
       console.log(response)

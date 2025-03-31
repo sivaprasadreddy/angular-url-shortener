@@ -13,11 +13,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiBaseUrl}/login`, credentials);
+    return this.http.post<LoginResponse>(`${this.apiBaseUrl}/api/login`, credentials);
   }
 
   register(request: CreateUserRequest): Observable<CreateUserResponse> {
-    return this.http.post<CreateUserResponse>(`${this.apiBaseUrl}/users`, request);
+    return this.http.post<CreateUserResponse>(`${this.apiBaseUrl}/api/users`, request);
   }
 
    setAuthUser(loginResponse: LoginResponse) {

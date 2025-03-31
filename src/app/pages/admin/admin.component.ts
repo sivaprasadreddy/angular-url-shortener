@@ -49,4 +49,8 @@ export class AdminComponent implements OnInit {
       this.shortUrlsPage = response;
     })
   }
+
+  getShortUrlString(shortKey: string) {
+    return this.shortUrlService.getShortUrlString(shortKey);
+  }
 }
