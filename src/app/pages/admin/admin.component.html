@@ -1,0 +1,34 @@
+<div class="container">
+  <h2 class="mt-5">All Shortened URLs</h2>
+  <div *ngIf="shortUrlsPage.data.length == 0" class="alert alert-info">
+    No URLs have been created yet.
+  </div>
+  <div *ngIf="shortUrlsPage.data.length > 0" class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th>Short URL</th>
+        <th>Original URL</th>
+        <th>Created By</th>
+        <th>Created</th>
+        <th>Expires</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let shortUrl of shortUrlsPage.data">
+        <td>
+          <a href="/s/{{shortUrl.shortKey}}" target="_blank">{{shortUrl.shortKey}}</a>
+        </td>
+        <td>
+          <a href="{{shortUrl.originalUrl}}" target="_blank">{{shortUrl.originalUrl}}</a>
+        </td>
+        <td>{{shortUrl.createdBy?.name }}</td>
+        <td>{{shortUrl.createdAt | date }}</td>
+        <td>{{shortUrl.expiresAt | date }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <app-pagination [shortUrlPagedResult]="shortUrlsPage"
+                    [paginationUrl]="'/admin/dashboard'"></app-pagination>
+  </div>
+</div>

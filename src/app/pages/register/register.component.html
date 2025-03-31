@@ -1,0 +1,40 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Registration</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="registerForm" id="loginForm" method="post" (ngSubmit)="register()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control"
+                   id="email" name="email"
+                   formControlName="email">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control"
+                   id="password" name="password"
+                   formControlName="password">
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control"
+                   id="name" name="name"
+                   formControlName="name">
+          </div>
+          <button type="submit" class="btn btn-primary"
+                  [ngClass]="{'disabled': registerForm.invalid}">Register</button>
+        </form>
+        <div *ngIf="error"
+             class="has-text-danger has-text-centered has-text-weight-bold">
+          <div>{{error}}</div>
+        </div>
+        <div class="mt-3">
+          <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

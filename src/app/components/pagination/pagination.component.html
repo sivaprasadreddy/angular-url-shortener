@@ -1,0 +1,46 @@
+<nav *ngIf="shortUrlPagedResult.totalPages > 1">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{'disabled': !shortUrlPagedResult.hasPrevious}">
+      <a class="page-link"
+         [routerLink]="[paginationUrl]" [queryParams]="{
+      page: 1 ,
+      }"
+         aria-label="First">
+        <span aria-hidden="true">First</span>
+      </a>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': !shortUrlPagedResult.hasPrevious}">
+      <a class="page-link"
+         [routerLink]="[paginationUrl]" [queryParams]="{
+      page: shortUrlPagedResult.pageNumber - 1 ,
+      }"
+         aria-label="Previous">
+        <span aria-hidden="true">Previous</span>
+      </a>
+    </li>
+    <li class="page-item disabled">
+        <span class="page-link" aria-label="Current Page Number of Total Pages">
+           Page {{shortUrlPagedResult.pageNumber}} of {{shortUrlPagedResult.totalPages}}
+           (Total: {{shortUrlPagedResult.totalElements}})
+        </span>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': !shortUrlPagedResult.hasNext}">
+      <a class="page-link"
+         [routerLink]="[paginationUrl]" [queryParams]="{
+      page: shortUrlPagedResult.pageNumber + 1 ,
+      }"
+         aria-label="Next">
+        <span aria-hidden="true">Next</span>
+      </a>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': !shortUrlPagedResult.hasNext}">
+      <a class="page-link"
+         [routerLink]="[paginationUrl]" [queryParams]="{
+          page: shortUrlPagedResult.totalPages ,
+          }"
+         aria-label="Last">
+        <span aria-hidden="true">Last</span>
+      </a>
+    </li>
+  </ul>
+</nav>
