@@ -30,4 +30,8 @@ export class ShortUrlService {
   createShortUrl(request: CreateShortUrlRequest): Observable<ShortUrl> {
     return this.http.post<ShortUrl>(`${this.apiBaseUrl}/short-urls`, request);
   }
+
+  deleteShortUrls(ids: number[]): Observable<void> {
+    return this.http.delete<void>(`${this.apiBaseUrl}/short-urls`, { body: { ids } });
+  }
 }

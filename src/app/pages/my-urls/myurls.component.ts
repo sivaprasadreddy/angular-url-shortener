@@ -27,6 +27,7 @@ export class MyUrlsComponent implements OnInit {
       hasNext: false,
       hasPrevious: false,
     }
+  selectedUrls: Set<number> = new Set<number>();
   private fb = inject(FormBuilder);
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -47,6 +48,61 @@ export class MyUrlsComponent implements OnInit {
     this.shortUrlService.getMyShortUrls(this.page).subscribe(response => {
       console.log(response)
       this.shortUrlsPage = response;
+      // Clear selection when fetching new data
+      this.selectedUrls.clear();
     })
+  }
+
+  toggleSelection(id: number) {
+    if (this.selectedUrls.has(id)) {
+      this.selectedUrls.delete(id);
+    } else {
+      this.selectedUrls.add(id);
+    }
+  }
+
+  isSelected(id: number): boolean {
+    return this.selectedUrls.has(id);
+  }
+
+  deleteSelectedUrls() {
+    if (this.selectedUrls.size === 0) {
+      return;
+    }
+
+    const count = this.selectedUrls.size;
+    const confirmMessage = `Are you sure you want to delete ${count} selected URL${count > 1 ? 's' : ''}?`;
+
+    if (confirm(confirmMessage)) {
+      const idsToDelete = Array.from(this.selectedUrls);
+      this.shortUrlService.deleteShortUrls(idsToDelete).subscribe({
+        next: () => {
+          this.fetchMyShortUrls();
+        },
+        error: (error) => {
+          console.error('Error deleting URLs:', error);
+        }
+      });
+    }
+  }
+
+  get hasSelectedUrls(): boolean {
+    return this.selectedUrls.size > 0;
+  }
+
+  get allSelected(): boolean {
+    return this.shortUrlsPage.data.length > 0 && this.selectedUrls.size === this.shortUrlsPage.data.length;
+  }
+
+  toggleSelectAll() {
+    if (this.allSelected) {
+      // Deselect all
+      this.selectedUrls.clear();
+    } else {
+      // Select all
+      this.shortUrlsPage.data.forEach(url => {
+        this.selectedUrls.add(url.id);
+      });
+    }
   }
 }
