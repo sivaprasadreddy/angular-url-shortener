@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
               private authService: AuthService) {
   }
   createShortUrlForm = this.fb.group({
-    originalUrl: ['', [Validators.required, Validators.pattern(/\S/)]],
+    originalUrl: ['', [Validators.required, Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:\/?#[\]@!$&'()*+,;=]+$/)]],
     isPrivate: '',
     expirationInDays: ''
   });
@@ -46,6 +46,10 @@ export class HomeComponent implements OnInit {
       this.page = parseInt(params.get('page') || "1");
       this.fetchShortUrls()
     })
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   getShortUrlString(shortKey: string) {

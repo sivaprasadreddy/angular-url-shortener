@@ -25,6 +25,10 @@ export class NavbarComponent {
     return this.authService.loginUserName();
   }
 
+  isAdmin(): boolean {
+    return this.authService.hasRole('ROLE_ADMIN');
+  }
+
   logout() {
     this.authService.logout()
   }

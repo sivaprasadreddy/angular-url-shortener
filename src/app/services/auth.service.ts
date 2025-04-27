@@ -39,6 +39,15 @@ export class AuthService {
     return ""
   }
 
+  hasRole(role: string): boolean {
+    let auth = localStorage.getItem("auth")
+    if(auth) {
+      let authJson = JSON.parse(auth) as Auth
+      return authJson.role === role
+    }
+    return false
+  }
+
   logout() {
     localStorage.removeItem("auth")
     localStorage.removeItem("token")

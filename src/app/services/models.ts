@@ -22,13 +22,6 @@ export interface CreateUserResponse {
   name: string
 }
 
-export interface User {
-  id: number
-  name: string
-  email: string
-  role: string
-}
-
 export interface ShortUrl {
   id: number
   shortKey: string

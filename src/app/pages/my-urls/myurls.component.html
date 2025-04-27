@@ -33,7 +33,7 @@
           <a href="{{shortUrl.originalUrl}}" target="_blank">{{shortUrl.originalUrl}}</a>
         </td>
         <td>{{shortUrl.createdAt | date }}</td>
-        <td>{{shortUrl.expiresAt | date }}</td>
+        <td>{{ (shortUrl.expiresAt | date) ?? 'Never'}}</td>
       </tr>
       </tbody>
     </table>
